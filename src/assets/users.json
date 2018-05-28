@@ -1,0 +1,15 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "John Cena",
+            "age": 28
+        },
+        {
+            "id": 2,
+            "name": "Mary Jane",
+            "age": 24
+        }
+    ]
+}
+    
