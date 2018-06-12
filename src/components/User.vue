@@ -17,6 +17,11 @@
                   <input id="age" type="text" class="validate" placeholder="Idade" v-model="model.age">
                 </div>
               </div>
+              <div class="row" v-if="Boolean(errorMessage)">
+                <p class="error">
+                  {{errorMessage}}
+                </p>
+              </div>
               <div class="row">
                 <a class="waves-effect waves-teal btn-flat" @click="save()">Adicionar</a>
               </div>
@@ -41,7 +46,7 @@
               </th>
             </tr>
             <tr v-for="user in users" :key="user.id" :class="'id-'+user.id">
-              <td class="id">
+              <td>
                 {{user.id}}
               </td>
               <td class="name">
@@ -66,15 +71,28 @@ export default {
   name: "List",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
       users: json.users,
-      model: {}
+      model: {},
+      errorMessage: ""
     };
   },
   methods: {
     save() {
-      this.model.id = this.users.length + 1;
-      this.users.push(Object.assign({}, this.model));
+      if(this.validate()) {
+        this.model.id = this.users.length + 1;
+        this.users.push(Object.assign({}, this.model));
+      } else {
+        this.errorMessage = "Erro no preenchimento!";
+      }
+    },
+    validate() {
+      if(!Boolean(this.model.name)) {
+        return false;
+      }
+      if(!Boolean(this.model.age)) {
+        return false;
+      }
+      return true;
     }
   }
 };
